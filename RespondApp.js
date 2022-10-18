@@ -1,30 +1,34 @@
-const Fastify = require("fastify");
+const express = require("express");
 
-const fastify = Fastify({
-    logger: false,
-})
+const ser = express();
 
-const middleware = (_req, _res, next) => {
-    console.log('Post isegi icin istek gönderildi');
+
+const middleware = (req, res, next) => {
+    console.log('Yeni bir istek geldi');
     next()
-  }
-  
-fastify.get("/hello", { preHandler: [middleware] }, (req, reply) => {
-    reply.send("Merhaba, GET istegi attiniz")
+}
+
+const middlewarePost = (req, res, next) => {
+    console.log('Post isteği için istek gönderildi');
+    next()
+}
+
+ser.get("/hello",middleware , (req, res) => {
+    res.send("Merhaba, GET istegi attiniz")
 });
 
-fastify.post("/hello",  { preHandler: [middleware] }, (req, reply) => {
-    reply.send("Merhaba, POST istegi attiniz")
+ser.post("/hello",middleware,middlewarePost , (req, res) => {
+    res.send("Merhaba, POST istegi attiniz")
 })
 
-fastify.put("/hello",  { preHandler: [middleware] }, (req, reply) => {
-    reply.send("Merhaba, PUT istegi attiniz")
+ser.put("/hello",middleware , (req, res) => {
+    res.send("Merhaba, PUT istegi attiniz")
 })
 
-fastify.delete("/hello", { preHandler: [middleware] } ,  (req, reply) => {
-    reply.send("Merhaba, DELETE istegi attiniz")
+ser.delete("/hello",middleware ,  (req, res) => {
+    res.send("Merhaba, DELETE istegi attiniz")
 })
 
-fastify.listen({port:3000}, (err, address) => {
-    if(err) throw err;
+ser.listen(3000, () => {
+    console.log("server is running")
 })
