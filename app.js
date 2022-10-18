@@ -10,19 +10,19 @@ const middleware = (_req, _res, next) => {
   }
   
 fastify.get("/hello", { preHandler: [middleware] }, (req, reply) => {
-    reply.send("merhaba get isteği attınız")
+    reply.send("merhaba get istegi attiniz")
 });
 
 fastify.post("/hello",  { preHandler: [middleware] }, (req, reply) => {
-    reply.send("merhaba post isteği attınız")
+    reply.send("merhaba post istegi attiniz")
 })
 
 fastify.put("/hello",  { preHandler: [middleware] }, (req, reply) => {
-    reply.send("merhaba put isteği attınız")
+    reply.send("merhaba put istegi attiniz")
 })
 
 fastify.delete("/hello", { preHandler: [middleware] } ,  (req, reply) => {
-    reply.send("merhaba delete isteği attınız")
+    reply.send("merhaba delete istegi attiniz")
 })
 
 fastify.listen({port:3000}, (err, address) => {
