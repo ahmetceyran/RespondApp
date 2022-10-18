@@ -5,24 +5,24 @@ const fastify = Fastify({
 })
 
 const middleware = (_req, _res, next) => {
-    console.log('Yeni bir istek geldi');
+    console.log('Post isegi icin istek gönderildi');
     next()
   }
   
 fastify.get("/hello", { preHandler: [middleware] }, (req, reply) => {
-    reply.send("merhaba get istegi attiniz")
+    reply.send("Merhaba, GET istegi attiniz")
 });
 
 fastify.post("/hello",  { preHandler: [middleware] }, (req, reply) => {
-    reply.send("merhaba post istegi attiniz")
+    reply.send("Merhaba, POST istegi attiniz")
 })
 
 fastify.put("/hello",  { preHandler: [middleware] }, (req, reply) => {
-    reply.send("merhaba put istegi attiniz")
+    reply.send("Merhaba, PUT istegi attiniz")
 })
 
 fastify.delete("/hello", { preHandler: [middleware] } ,  (req, reply) => {
-    reply.send("merhaba delete istegi attiniz")
+    reply.send("Merhaba, DELETE istegi attiniz")
 })
 
 fastify.listen({port:3000}, (err, address) => {
